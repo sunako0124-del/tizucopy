@@ -172,7 +172,7 @@ return new Promise(function(resolve) {
     KAN.addLayer(
       L.circleMarker([data.myLAT, data.myLNG],{
         color: '#fdfdfd',
-        weight: 4,
+        weight: 2,
         opacity: 1,
         fillColor: '#534f4f',
         fillOpacity: 1,
@@ -185,7 +185,7 @@ return new Promise(function(resolve) {
       MI.addLayer(
         L.circleMarker([data.myLAT, data.myLNG],{
           color: '#fdfdfd',
-          weight: 4,
+          weight: 2,
           opacity: 1,
           fillColor: '#fa04b0',
           fillOpacity: 1,
