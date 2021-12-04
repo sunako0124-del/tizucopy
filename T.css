@@ -1,0 +1,95 @@
+.BT{
+    display: block;
+    width: 95%;
+    border: 0.3px solid #999;
+    box-sizing: border-box;
+    font-size: 16px;
+	text-align: right; 
+}
+
+.t1{
+    display: block;
+    width: 95%;
+    border: 0px solid #999;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.t2{
+    display: block;
+    width: 80%;
+    padding: 0.1em;
+    border: 0.1px solid #999;
+    box-sizing: border-box;
+    margin: auto;
+    font-size: 16px;
+}
+
+table{
+	table-layout: fixed;
+	width: 95%;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+input:focus, select:focus, textarea:focus {
+    background-color: #bde9ba;
+}
+
+html, body {
+font-size: 16px;
+padding: 0; margin: 0
+} html, body, 
+
+#map {height: 100%; width: 100%;}
+
+
+.open {
+	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
+}
+#pop-up {
+	display: none; /* label でコントロールするので input は非表示に */
+}
+
+.overlay {
+	display: none; /* input にチェックが入るまでは非表示に */
+}
+#pop-up:checked + .overlay {
+	display: block;
+	z-index: 9999;
+	background-color: #00000070;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	font-size: 16px;
+}
+.window {
+	width: 90vw;
+	max-width: 360px;
+	height: 350px;
+	background-color: #bbb8b8;
+	border-radius: 10px;
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 16px;
+}
+.text {
+	font-size: 16px;
+	margin: 0;
+}
+.close {
+	cursor:pointer;
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	font-size: 20px;
+}
+
+
+

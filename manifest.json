@@ -1,0 +1,25 @@
+{
+  "name"              : "SettiSokuteiCsvMap",
+  "short_name"        : "Setti",
+  "Scope": "/tizu2/",
+  
+  "icons": [{
+
+    "src": "image-size256.png",
+    "sizes":"256x256",
+    "type":"image/png"
+   }, {
+      "src": "image-size512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  }
+  ],
+
+  "description":"/index.html",
+ 
+  "start_url": "./index.html",
+  "display"           : "standalone",
+  "background_color": "#e56c1b",
+  "theme_color"       : "#000000"
+ 
+}
