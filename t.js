@@ -173,7 +173,7 @@ return new Promise(function(resolve) {
       L.circleMarker([data.myLAT, data.myLNG],{
         color: '#fdfdfd',
         weight: 4,
-        opacity: 0.8,
+        opacity: 1,
         fillColor: '#534f4f',
         fillOpacity: 1,
         radius: 9,
@@ -186,7 +186,7 @@ return new Promise(function(resolve) {
         L.circleMarker([data.myLAT, data.myLNG],{
           color: '#fdfdfd',
           weight: 4,
-          opacity: 0.8,
+          opacity: 1,
           fillColor: '#fa04b0',
           fillOpacity: 1,
           radius: 9,
