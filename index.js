@@ -27,7 +27,7 @@ function getAll(event) {
 	return new Promise(function(resolve) {
     //var result = document.getElementById("result");
     result.innerHTML = "";
-　bbb  = "";          
+ bbb  = "";          
     var transaction = db.transaction(["mystore"], "readwrite");
     var store = transaction.objectStore("mystore");
     var request = store.openCursor();
@@ -36,7 +36,7 @@ function getAll(event) {
         if(event.target.result == null) {
         //データが無いもしくは終わった
         if (bbb== "") {
-      　  result.innerHTML="測定値が入力されたデータはありません";
+         result.innerHTML="測定値が入力されたデータはありません";
             } else {       
              result.innerHTML=bbb;
             }
@@ -70,14 +70,24 @@ var rq = st.count();
 	
     //全データ削除 
     function deleteAll(event) {
-        var result = document.getElementById("result");
-        result.innerHTML = "";
-        var transaction = db.transaction(["mystore"], "readwrite");
-        var store = transaction.objectStore("mystore");
-        var request = store.clear(); 
-        request.onsuccess = function (event) {
-        }
-        result.innerHTML = "全データ削除しました。";
+
+       	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
+	    if(window.confirm('本当にいいんですね？')){
+
+            var result = document.getElementById("result");
+            result.innerHTML = "";
+            var transaction = db.transaction(["mystore"], "readwrite");
+            var store = transaction.objectStore("mystore");
+            var request = store.clear(); 
+            request.onsuccess = function (event) {
+            }
+            result.innerHTML = "全データ削除しました。";
+	    }
+	        // 「キャンセル」時の処理開始
+	    else{
+            window.alert('キャンセルされました'); // 警告ダイアログを表示
+
+	    }
     }
 	
 // CSV出力
