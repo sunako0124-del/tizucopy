@@ -123,6 +123,9 @@ function setValue(event) {
   var store = transaction.objectStore("mystore")
   var request = store.put({ mykey: key, myvalue: value, myBSY: BSY, myLAT: LAT, myLNG: LNG, mytuti: tuti, mybiko: biko, myGLAT: GLAT, myGLNG: GLNG, mynow: now ,myetc:etc, myIV:IV, myBRK:BRK, myTIK2:TIK2, myTIK3:TIK3});
   
+  
+  MAK();
+
   //入力欄リセット
 	document.getElementById("POLNO").value = "";
 	document.getElementById("setti1").value = "";
@@ -136,8 +139,8 @@ function setValue(event) {
   document.getElementById("BRK").value = "";
   document.getElementById("TIK2").value = "";
   document.getElementById("TIK3").value = "";
-  //再マーク
-   MAKall();
+  
+  
   ck0();
   currentWatchReset();
    request.onsuccess = function (event) {
@@ -170,7 +173,7 @@ return new Promise(function(resolve) {
     if(data.myvalue>0){
     //L.marker([data.myLAT, data.myLNG],{icon:myIcon2,customID: data.mykey}).addTo(KAN).on('click', function(e) { markerClick(e);});
     KAN.addLayer(
-      L.circleMarker([data.myLAT, data.myLNG],{
+           L.circleMarker([data.myLAT, data.myLNG],{
         color: '#fdfdfd',
         weight: 2,
         opacity: 1,
@@ -182,6 +185,7 @@ return new Promise(function(resolve) {
       .on('click', function(e) { markerClick(e);})
     );
     } else {
+      
       MI.addLayer(
         L.circleMarker([data.myLAT, data.myLNG],{
           color: '#fdfdfd',
@@ -200,7 +204,29 @@ return new Promise(function(resolve) {
       })
 }
 
+// LDBからマーカ
+function MAK() {
+  var key = document.getElementById("POLNO").value;
+  var value = Number(document.getElementById("setti1").value);
+  var LAT = Number(document.getElementById("LAT").value);
+  var LNG = Number(document.getElementById("LNG").value);
 
+  if (value >0) {
+    MI.eachLayer((layer)=> {if (key === layer.options.customID) {MI.removeLayer(layer);}});
+
+    KAN.addLayer(L.circleMarker([LAT, LNG],{
+    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#534f4f',fillOpacity: 1,radius: 9,customID: key })
+    .on('click', function(e) { markerClick(e);})
+    );
+  }else{
+    KAN.eachLayer((layer)=> {if (key === layer.options.customID) {KAN.removeLayer(layer);}});
+
+    MI.addLayer(L.circleMarker([LAT, LNG],{
+    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#fa04b0',fillOpacity: 1,radius: 9,customID: key})
+    .on('click', function(e) { markerClick(e);})
+    );
+  }
+}
 
 //マーカーが全部入るイメージ
 function zenb(){
