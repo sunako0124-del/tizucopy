@@ -174,7 +174,7 @@ return new Promise(function(resolve) {
       html: data.mykey.slice( -4 ),
       className: 'divicon2',
       iconSize: [0,0],
-      iconAnchor: [25,40]
+      iconAnchor: [25,45]
     });
   
     //値が入ってたら完了（グレー）、未入力ピンク
