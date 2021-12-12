@@ -156,9 +156,11 @@ return new Promise(function(resolve) {
   var store = transaction.objectStore("mystore");
   var request = store.openCursor();
 
+
   //マーカーレイヤー削除
   MI.clearLayers();
   KAN.clearLayers();
+  moji.clearLayers();
 
   request.onsuccess = function (event) {
     //リストがなかったら終了  
@@ -168,6 +170,12 @@ return new Promise(function(resolve) {
      }
     var cursor = event.target.result;
     var data = cursor.value;
+    var divIcon3 = L.divIcon({
+      html: data.mykey.slice( -4 ),
+      className: 'divicon2',
+      iconSize: [0,0],
+      iconAnchor: [25,40]
+    });
   
     //値が入ってたら完了（グレー）、未入力ピンク
     if(data.myvalue>0){
@@ -199,6 +207,9 @@ return new Promise(function(resolve) {
       .on('click', function(e) { markerClick(e);})
       );
     }
+    moji.addLayer(
+      L.marker([data.myLAT, data.myLNG], {icon: divIcon3})
+    );
     cursor.continue();
       }
       })

@@ -141,13 +141,13 @@ var DKS = { color:'red', weight: 5 }
 var BKS = { color:'blue', weight: 5 }
 var MI = L.featureGroup();
 var KAN = L.featureGroup();
+var moji = L.featureGroup();
 var myIcon1 = L.divIcon({ className:'icon1'});
 var myIcon2 = L.divIcon({ className:'icon2'}); 
 var myIcon3 = L.divIcon({ className:'icon3'}); 
-var map = L.map('map', {center: [42.9577763,141.353986],zoom: 17,layers: [gsipale, MI, KAN]});
+var map = L.map('map', {center: [42.9577763,141.353986],zoom: 17,layers: [gsipale, MI, KAN, moji]});
 var baseLayers = {"地理院地図": gsi,"淡色地図": gsipale,"航空写真": gsip,"オープンストリートマップ": osm};
-var overlays = { "完了":KAN,"未完":MI};
-
+var overlays = { "完了":KAN,"未完":MI,"番号":moji};
 L.control.layers(baseLayers, overlays).addTo(map);
 
 //スケール設定
@@ -193,7 +193,14 @@ window.addEventListener("load", function() {
 mikan();
 });
 
-
+//ズームイベント
+map.on('zoom', function(e) {
+   if (map.getZoom() >17){ //8越え(詳細)ならアイコン表示　小
+      map.addLayer(moji);
+   } else {                  //9以下(広域)ならメッセージ表示 大
+      map.removeLayer(moji);
+   }
+});
 
 </script>
 
