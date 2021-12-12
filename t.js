@@ -150,72 +150,73 @@ function setValue(event) {
 
 // LDBからマーカ
 function MAKall(event) {
-return new Promise(function(resolve) {
-  var result = document.getElementById("result");                   
-  var transaction = db.transaction(["mystore"], "readwrite");
-  var store = transaction.objectStore("mystore");
-  var request = store.openCursor();
+  return new Promise(function(resolve) {
+    var result = document.getElementById("result");                   
+    var transaction = db.transaction(["mystore"], "readwrite");
+    var store = transaction.objectStore("mystore");
+    var request = store.openCursor();
 
 
-  //マーカーレイヤー削除
-  MI.clearLayers();
-  KAN.clearLayers();
-  moji.clearLayers();
+    //マーカーレイヤー削除
+    MI.clearLayers();
+    KAN.clearLayers();
+    moji.clearLayers();
 
-  request.onsuccess = function (event) {
-    //リストがなかったら終了  
-    if(event.target.result == null) {
-    resolve()   
-    return;
-     }
-    var cursor = event.target.result;
-    var data = cursor.value;
-    var divIcon3 = L.divIcon({
-      html: data.mykey.slice( -4 ),
-      className: 'divicon2',
-      iconSize: [0,0],
-      iconAnchor: [25,50]
-    });
-  
-    //値が入ってたら完了（グレー）、未入力ピンク
-    if(data.myvalue>0){
-    //L.marker([data.myLAT, data.myLNG],{icon:myIcon2,customID: data.mykey}).addTo(KAN).on('click', function(e) { markerClick(e);});
-    KAN.addLayer(
-           L.circleMarker([data.myLAT, data.myLNG],{
-        color: '#fdfdfd',
-        weight: 2,
-        opacity: 1,
-        fillColor: '#534f4f',
-        fillOpacity: 1,
-        radius: 10,
-        
-        customID: data.mykey })
-     //.bindPopup(data.mykey)
-      .on('click', function(e) { markerClick(e);})
-    );
-    } else {
-      
-      MI.addLayer(
-        L.circleMarker([data.myLAT, data.myLNG],{
-          color: '#fdfdfd',
-          weight: 2,
-          opacity: 1,
-          fillColor: '#fa04b0',
-          fillOpacity: 1,
-          radius: 10,
-          
-        customID: data.mykey})
-      //.bindPopup(data.mykey)
-      .on('click', function(e) { markerClick(e);})
-      );
-    }
-    moji.addLayer(
-      L.marker([data.myLAT, data.myLNG], {icon: divIcon3})
-
-    );
-    cursor.continue();
+    request.onsuccess = function (event) {
+      //リストがなかったら終了  
+      if(event.target.result == null) {
+      resolve()   
+      return;
       }
-      })
+      var cursor = event.target.result;
+      var data = cursor.value;
+      var divIcon3 = L.divIcon({
+        html: data.mykey.slice( -4 ),
+        className: 'divicon2',
+        iconSize: [0,0],
+      
+        iconAnchor: [15,45]
+      });
+  
+      moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3}));
+
+      //値が入ってたら完了（グレー）、未入力ピンク
+      if(data.myvalue>0){
+        
+      //L.marker([data.myLAT, data.myLNG],{icon:myIcon2,customID: data.mykey}).addTo(KAN).on('click', function(e) { markerClick(e);});
+      KAN.addLayer(
+            L.circleMarker([data.myLAT, data.myLNG],{
+          color: '#fdfdfd',
+          weight: 1,
+          opacity: 1,
+          fillColor: '#534f4f',
+          fillOpacity: 1,
+          radius: 11,
+          
+          customID: data.mykey })
+
+        .on('click', function(e) { markerClick(e);})
+      );
+      } else {
+        
+        MI.addLayer(
+          L.circleMarker([data.myLAT, data.myLNG],{
+            color: '#fdfdfd',
+            weight: 1,
+            opacity: 1,
+            fillColor: '#fa04b0',
+            fillOpacity: 1,
+            radius: 11,
+            
+          customID: data.mykey})
+
+        .on('click', function(e) { markerClick(e);})
+        );
+      }
+
+     cursor.continue();
+    }
+  })
 }
 
 // LDBからマーカ
