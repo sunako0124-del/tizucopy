@@ -174,7 +174,7 @@ return new Promise(function(resolve) {
       html: data.mykey.slice( -4 ),
       className: 'divicon2',
       iconSize: [0,0],
-      iconAnchor: [25,45]
+      iconAnchor: [25,50]
     });
   
     //値が入ってたら完了（グレー）、未入力ピンク
@@ -187,7 +187,8 @@ return new Promise(function(resolve) {
         opacity: 1,
         fillColor: '#534f4f',
         fillOpacity: 1,
-        radius: 9,
+        radius: 10,
+        
         customID: data.mykey })
      //.bindPopup(data.mykey)
       .on('click', function(e) { markerClick(e);})
@@ -201,7 +202,8 @@ return new Promise(function(resolve) {
           opacity: 1,
           fillColor: '#fa04b0',
           fillOpacity: 1,
-          radius: 9,
+          radius: 10,
+          
         customID: data.mykey})
       //.bindPopup(data.mykey)
       .on('click', function(e) { markerClick(e);})
@@ -209,6 +211,7 @@ return new Promise(function(resolve) {
     }
     moji.addLayer(
       L.marker([data.myLAT, data.myLNG], {icon: divIcon3})
+
     );
     cursor.continue();
       }
