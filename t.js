@@ -175,10 +175,10 @@ function MAKall(event) {
         className: 'divicon2',
         iconSize: [0,0],
       
-        iconAnchor: [15,45]
+        iconAnchor: [0,28]
       });
   
-      moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3}));
+      moji.addLayer(L.marker([data.myLAT, data.myLNG], {icon: divIcon3,customID: data.mykey}).on('click', function(e) { markerClick(e);}));
 
       //値が入ってたら完了（グレー）、未入力ピンク
       if(data.myvalue>0){
