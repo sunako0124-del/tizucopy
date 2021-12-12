@@ -191,7 +191,7 @@ function MAKall(event) {
           opacity: 1,
           fillColor: '#534f4f',
           fillOpacity: 1,
-          radius: 11,
+          radius: 10,
           
           customID: data.mykey })
 
@@ -206,7 +206,7 @@ function MAKall(event) {
             opacity: 1,
             fillColor: '#fa04b0',
             fillOpacity: 1,
-            radius: 11,
+            radius: 10,
             
           customID: data.mykey})
 
@@ -226,18 +226,17 @@ function MAK() {
   var LAT = Number(document.getElementById("LAT").value);
   var LNG = Number(document.getElementById("LNG").value);
 
-  if (value >0) {
-    MI.eachLayer((layer)=> {if (key === layer.options.customID) {MI.removeLayer(layer);}});
+KAN.eachLayer((layer)=> {if (key === layer.options.customID) {KAN.removeLayer(layer);}});
+MI.eachLayer((layer)=> {if (key === layer.options.customID) {MI.removeLayer(layer);}});
 
+  if (value >0) {
     KAN.addLayer(L.circleMarker([LAT, LNG],{
-    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#534f4f',fillOpacity: 1,radius: 9,customID: key })
+    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#534f4f',fillOpacity: 1,radius: 10,customID: key })
     .on('click', function(e) { markerClick(e);})
     );
   }else{
-    KAN.eachLayer((layer)=> {if (key === layer.options.customID) {KAN.removeLayer(layer);}});
-
     MI.addLayer(L.circleMarker([LAT, LNG],{
-    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#fa04b0',fillOpacity: 1,radius: 9,customID: key})
+    color: '#fdfdfd',weight: 2,opacity: 1,fillColor: '#fa04b0',fillOpacity: 1,radius: 10,customID: key})
     .on('click', function(e) { markerClick(e);})
     );
   }
