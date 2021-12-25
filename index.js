@@ -24,13 +24,14 @@ var indexedDB = window.indexedDB || window.mozIndexedDB || window.msIndexedDB;
 
 //全データ表示
 function getAll(event) { 
-	return new Promise(function(resolve) {
-    //var result = document.getElementById("result");
+    return new Promise(function(resolve) {
+
     result.innerHTML = "";
- bbb  = "";          
+    bbb  = "";          
     var transaction = db.transaction(["mystore"], "readwrite");
     var store = transaction.objectStore("mystore");
     var request = store.openCursor();
+
     request.onsuccess = function (event) {
 
         if(event.target.result == null) {
@@ -40,19 +41,19 @@ function getAll(event) {
             } else {       
              result.innerHTML=bbb;
             }
-         resolve(bbb)   
-        return;
+            resolve(bbb)   
+        
         }
         var cursor = event.target.result;
         var data = cursor.value;
         
         //測定値が入っているものだけ表示
         if(data.myvalue >0) {
-          //mykey: key, myvalue: value, myBSY: BSY, myLAT: LAT, myLNG: LNG, mytuti: tuti, mybiko: biko, myGLAT: GLAT, myGLNG: GLNG, mynow: now ,myetc:etc, myIV:IV, myBRK:BRK, myTIK2:TIK2, myTIK3:TIK3
          bbb += cursor.key + "," + data.myLAT + "," + data.myLNG +  "," + data.myvalue +  "," + data.myBSY + "," + data.mytuti + "," + data.mybiko+ "," + data.myetc + "," + data.myGLAT + "," + data.myGLNG + "," + data.mynow + "," + data.myIV + "," + data.myBRK + "," + data.myTIK2 + "," + data.myTIK3 + "\n";
         }
      cursor.continue();
     }
+
     })
 }    
 
@@ -69,36 +70,53 @@ var rq = st.count();
 
 	
     //全データ削除 
-    function deleteAll(event) {
-
-       	// 「OK」時の処理開始 ＋ 確認ダイアログの表示
-	    if(window.confirm('本当にいいんですね？')){
-
-            var result = document.getElementById("result");
-            result.innerHTML = "";
-            var transaction = db.transaction(["mystore"], "readwrite");
-            var store = transaction.objectStore("mystore");
-            var request = store.clear(); 
-            request.onsuccess = function (event) {
-            }
-            result.innerHTML = "全データ削除しました。";
-	    }
-	        // 「キャンセル」時の処理開始
-	    else{
-            window.alert('キャンセルされました'); // 警告ダイアログを表示
-
-	    }
-    }
+    function deleteAll() {
+        return new Promise(function(resolve) {
+        var result = document.getElementById("result");
+        var transaction = db.transaction(["mystore"], "readwrite");
+        var store = transaction.objectStore("mystore");
+        var request = store.clear(); 
+        request.onsuccess = function () {}
+        result.innerHTML = "全データ削除しました。";
+    })
+	}
+ 
 	
 // CSV出力
 async function dCSV(){
-await getAll(event);
+await getAll();
 await downloadCSV(bbb);
 }
 
 // CSV出力
+async function deleteAll3(){
+    result.innerHTML = "";
+    if(window.confirm('データの削除を開始してよろしいですか？')){
+        let promise = new Promise(function(resolve, reject) {
+            resolve('ok');
+            reject('Error...');
+          });
+        await getAll();
+        await downloadCSV(bbb);
+        await deleteAll();
+        result.innerHTML = "データ削除しました。";
+        //resolve();
+    }else{
+        // 「キャンセル」時の処理開始
+        result.innerHTML = "削除はキャンセルしました。";
+        //resolve();
+    }
+}
+
+
+
+
+
+
+
+// CSV出力
 function downloadCSV(bbb) {
-	return new Promise(function(resolve) {
+    return new Promise(function(resolve) {
     //ダウンロードするCSVファイル名を指定する
     var filename = "download.csv";
     //CSVデータ
@@ -108,9 +126,11 @@ function downloadCSV(bbb) {
     //Blobでデータを作成する
     var blob = new Blob([bom, data], { type: "text/csv" });
     //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
+
   if (window.navigator.msSaveBlob) {
         window.navigator.msSaveBlob(blob, filename);
         //その他ブラウザ
+        resolve();
         } else {
         //BlobからオブジェクトURLを作成する
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
@@ -124,10 +144,12 @@ function downloadCSV(bbb) {
       download.click();
         //createObjectURLで作成したオブジェクトURLを開放する
        (window.URL || window.webkitURL).revokeObjectURL(url);
-      
+       resolve();
     }
+    
     })
 } 
+
 //登録  NO 緯度 経度,数値,数値２,土,備考,備考２
        //key,myLAT.myLNG.myvalu.myBSY.mytuti.mybiko.myetc.myGLAT.myGLNG.mynow.myIV.myBRK.myTIK2.myTIK3
 function setValue(key,LAT,LNG,value,BSY,tuti,biko,etc,GLAT,GLNG,NOWW,IV,BK,TK2,TK3) {
@@ -139,7 +161,6 @@ function setValue(key,LAT,LNG,value,BSY,tuti,biko,etc,GLAT,GLNG,NOWW,IV,BK,TK2,T
    request.onsuccess = function (event) {
    }
 }
-
 
 //テキストデータ取込
 function txtinp() {
