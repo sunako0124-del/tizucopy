@@ -59,20 +59,23 @@ etc.addEventListener("input",function(){
          <td colspan="2"><input type="number"  id="POLNO" name="POLNO"  class="t1" placeholder="キー" readonly></td>
          <td><input type="button" value="経路表示" onclick="gmap()"/></td>
       </tr>
+
+      <tr>
+         <td><label>連絡事項</label></td>      
+         <td colspan="3"><select name="etc" id="etc" class="t1">
+         <option value="0"></option>
+         <option value="1">設備・接地がありません</option>
+         <option value="3">単独→共同に接続済</option>
+         <option value="4">単独接地（共同あり）</option>
+         <option value="5">単独接地２極あり</option>
+         </select></td>
+      </tr>
       <tr>
          <td><label>メモ</label></td>
          <td colspan="3"><input  id="biko" name="biko" placeholder="メモ" class="t1"></td>
       </tr>
       
-      <tr>
-         <td><label> </label></td>      
-         <td colspan="3"><select name="etc" id="etc" class="t1">
-         <option value="0"></option>
-         <option value="1">接地、電柱がありません</option>
-         <option value="3">共同に接続しました</option>
-         <option value="4">単独接地です</option>
-         </select></td>
-      </tr>
+
       <tr>
          <td><label>地際情報</label></td>
   

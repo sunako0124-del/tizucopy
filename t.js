@@ -107,7 +107,7 @@ function setValue(event) {
   if (value == 0){
     alert('接地抵抗が未入力です');document.getElementById('setti1').focus();return;
   } 
-  if (etc == 4 && BSY == 0 ) {
+  if (etc >= 4 && BSY == 0 ) {
     alert('単独接地の時は、A種とB種必須入力です。単独だけど1極しかない時は、単独接地を選択せずにそのまま入力してください。');document.getElementById('BSY').focus();return;
   } 
    
@@ -342,7 +342,7 @@ function ima() {
 function Bsyu(){
 const etc = document.getElementById("etc").value
 const st = document.getElementById("setti1").value
-if (etc === '4'){
+if (etc >= '4'){
 document.getElementById('BSY').style.visibility = 'visible';
 document.getElementById('asyu').style.visibility = 'visible';
 document.getElementById('bsyu').style.visibility = 'visible';
