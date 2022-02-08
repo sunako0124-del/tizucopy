@@ -73,7 +73,8 @@ padding: 0; margin: 0
 .window {
 	width: 90vw;
 	max-width: 380px;
-	height: 350px;
+	height: 38
+0px;
 	background-color: #bbb8b8;
 	border-radius: 10px;
 	position: fixed;
