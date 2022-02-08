@@ -76,6 +76,7 @@ function markerClick(e){
       BRK.value = event.target.result.myBRK
       TIK2.value = event.target.result.myTIK2
       TIK3.value = event.target.result.myTIK3
+      SUTE.value = event.target.result.mySUTE
       BSY.value = event.target.result.myBSY
       radioNodeList[event.target.result.mytuti].checked = true ;
       }
@@ -101,6 +102,7 @@ function setValue(event) {
   var BRK = document.getElementById("BRK").value;
   var TIK2 = document.getElementById("TIK2").value;
   var TIK3 = document.getElementById("TIK3").value;
+  var SUTE = document.getElementById("SUTE").value;
 
   //チェック
   if (key >0){} else {alert('マーカーをクリックしてから登録してください!!');return;}
@@ -121,7 +123,7 @@ function setValue(event) {
   //                  
   var transaction = db.transaction(["mystore"], "readwrite");
   var store = transaction.objectStore("mystore")
-  var request = store.put({ mykey: key, myvalue: value, myBSY: BSY, myLAT: LAT, myLNG: LNG, mytuti: tuti, mybiko: biko, myGLAT: GLAT, myGLNG: GLNG, mynow: now ,myetc:etc, myIV:IV, myBRK:BRK, myTIK2:TIK2, myTIK3:TIK3});
+  var request = store.put({ mykey: key, myvalue: value, myBSY: BSY, myLAT: LAT, myLNG: LNG, mytuti: tuti, mybiko: biko, myGLAT: GLAT, myGLNG: GLNG, mynow: now ,myetc:etc, myIV:IV, myBRK:BRK, myTIK2:TIK2, myTIK3:TIK3, mySUTE:SUTE});
   
   
   MAK();
@@ -139,7 +141,7 @@ function setValue(event) {
   document.getElementById("BRK").value = "";
   document.getElementById("TIK2").value = "";
   document.getElementById("TIK3").value = "";
-  
+  document.getElementById("SUTE").value = ""; 
   
   ck0();
   currentWatchReset();
