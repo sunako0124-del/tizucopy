@@ -72,7 +72,7 @@ padding: 0; margin: 0
 }
 .window {
 	width: 90vw;
-	max-width: 360px;
+	max-width: 380px;
 	height: 350px;
 	background-color: #bbb8b8;
 	border-radius: 10px;
