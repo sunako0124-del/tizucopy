@@ -103,13 +103,14 @@ function getCount(event) {
        
         //測定値が入っているものだけ表示
 
-        if(data.myvalue >0) {
-
-         kans = kans + 1
-
+        if(data.myvalue >0)
+{
+kans = kans + 1;
+} else {
+zens = zens + 1;
         }
 
-              zens = zens + 1
+              
 
      cursor.continue();
 
