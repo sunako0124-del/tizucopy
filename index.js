@@ -57,15 +57,69 @@ function getAll(event) {
     })
 }    
 
+
+ 
+
 //数える
-function getCount() {
-var dbq = db.transaction(["mystore"], "readwrite");
-var st = dbq.objectStore("mystore");
-var rq = st.count();
-	rq.onsuccess = function (e) {
-	result.innerHTML =  e.target.result ;
-	}
-}	
+
+function getCount(event) {
+ return new Promise(function(resolve) {
+    //var result = document.getElementById("result");
+    result.innerHTML = "";
+　bbb  = "";
+
+  var kans = 0 ;
+  var zens = 0 ;
+
+    var transaction = db.transaction(["mystore"], "readwrite");
+    var store = transaction.objectStore("mystore");
+    var request = store.openCursor();
+    request.onsuccess = function (event) {
+
+        if(event.target.result == null) {
+
+        //データが無いもしくは終わった
+
+        if (szens = 0) {
+
+      　  result.innerHTML="測定値が入力されたデータはありません";
+
+            } else {      
+
+             result.innerHTML= "完了:" +  kans + "件  未完了:" + zens + "件" ;
+
+            }
+
+         resolve(szens)  
+
+        return;
+
+        }
+
+        var cursor = event.target.result;
+
+        var data = cursor.value;
+
+       
+        //測定値が入っているものだけ表示
+
+        if(data.myvalue >0) {
+
+         kans = kans + 1
+
+        }
+
+              zens = zens + 1
+
+     cursor.continue();
+
+    }
+
+    })
+
+}   
+
+
 	
 
 	
