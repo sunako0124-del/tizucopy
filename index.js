@@ -213,27 +213,12 @@ function setValue(key,LAT,LNG,value,BSY,tuti,biko,etc,GLAT,GLNG,NOWW,IV,BK,TK2,T
   if (key >0){} else {return;}
   var transaction = db.transaction(["mystore"], "readwrite");
   var store = transaction.objectStore("mystore")
-  var request = store.put({ mykey: key.replace(/-/g, ''), myLAT: LAT,myLNG: LNG,myvalue: value,myBSY: BSY, mytuti: tuti, mybiko: biko, myetc: etc ,myGLAT:GLAT,myGLNG:GLNG,mynow:NOWW,myIV:IV,myBRK:BK,myTIK2:TK2,myTIK3:TK3,mySUTE:SUTE});
+  var request = store.put({ mykey: key, myLAT: LAT,myLNG: LNG,myvalue: value,myBSY: BSY, mytuti: tuti, mybiko: biko, myetc: etc ,myGLAT:GLAT,myGLNG:GLNG,mynow:NOWW,myIV:IV,myBRK:BK,myTIK2:TK2,myTIK3:TK3,mySUTE:SUTE});
    request.onsuccess = function (event) {
    }
 }
 
-//テキストデータ取込
-function txtinp() {
-var CR = String.fromCharCode(13);
-var LF = String.fromCharCode(10);
-var col = document.getElementById("ttt").value;
-//var col = result.innerHTML
-var cols = col.split(LF);
 
-            var data = [];
-            for (var i = 0; i < cols.length; i++) {
-    
-              var data = cols[i].split(',');          
-                setValue(data[0].replace(/-/g, ''),data[1],data[2],0,"","","","","","","","","","","");
-            }
-result.innerHTML = '入力したデータを取り込みました'; 
-}
 
 //csvインポート
 // File APIに対応しているか確認
@@ -259,7 +244,7 @@ if(window.File && window.FileReader && window.FileList && window.Blob) {
                 
               var data = cols[i].split(',');
                         //電柱NO,緯度,経度,接地測定値,B種,舗装,メモ,メモ2,測定緯度,測定経度,測定日時,IV,ボルコン,蓄力２号,蓄力３号  
-                setValue(data[0],data[1],data[2],uc(data[3]),uc(data[4]),uc(data[5]),uc(data[6]),uc(data[7]),uc(data[8]),uc(data[9]),uc(data[10]),uc(data[11]),uc(data[12]),uc(data[13]),uc(data[14]),uc(data[15]));
+                setValue(data[0].replace(/-/g, ''),data[1],data[2],uc(data[3]),uc(data[4]),uc(data[5]),uc(data[6]),uc(data[7]),uc(data[8]),uc(data[9]),uc(data[10]),uc(data[11]),uc(data[12]),uc(data[13]),uc(data[14]),uc(data[15]));
 
             }
 	file.value = '';
