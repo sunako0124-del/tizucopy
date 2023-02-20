@@ -49,7 +49,7 @@ function getAll(event) {
         
         //測定値が入っているものだけ表示
         if(data.myvalue >0) {
-         bbb += cursor.key + "," + data.myLAT + "," + data.myLNG +  "," + data.myvalue +  "," + data.myBSY + "," + data.mytuti + "," + data.mybiko+ "," + data.myetc + "," + data.myGLAT + "," + data.myGLNG + "," + data.mynow + "," + data.myIV + "," + data.myBRK + "," + data.myTIK2 + "," + data.myTIK3 + "," + data.mySUTE + "\n";
+         bbb += cursor.key.slice(0,6) + "-" + cursor.key.slice(6,12) + "," + data.myLAT + "," + data.myLNG +  "," + data.myvalue +  "," + data.myBSY + "," + data.mytuti + "," + data.mybiko+ "," + data.myetc + "," + data.myGLAT + "," + data.myGLNG + "," + data.mynow + "," + data.myIV + "," + data.myBRK + "," + data.myTIK2 + "," + data.myTIK3 + "," + data.mySUTE + "\n";
         }
      cursor.continue();
     }
