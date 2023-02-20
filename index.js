@@ -213,7 +213,7 @@ function setValue(key,LAT,LNG,value,BSY,tuti,biko,etc,GLAT,GLNG,NOWW,IV,BK,TK2,T
   if (key >0){} else {return;}
   var transaction = db.transaction(["mystore"], "readwrite");
   var store = transaction.objectStore("mystore")
-  var request = store.put({ mykey: key, myLAT: LAT,myLNG: LNG,myvalue: value,myBSY: BSY, mytuti: tuti, mybiko: biko, myetc: etc ,myGLAT:GLAT,myGLNG:GLNG,mynow:NOWW,myIV:IV,myBRK:BK,myTIK2:TK2,myTIK3:TK3,mySUTE:SUTE});
+  var request = store.put({ mykey: key.replace(/-/g, ''), myLAT: LAT,myLNG: LNG,myvalue: value,myBSY: BSY, mytuti: tuti, mybiko: biko, myetc: etc ,myGLAT:GLAT,myGLNG:GLNG,mynow:NOWW,myIV:IV,myBRK:BK,myTIK2:TK2,myTIK3:TK3,mySUTE:SUTE});
    request.onsuccess = function (event) {
    }
 }
@@ -230,7 +230,7 @@ var cols = col.split(LF);
             for (var i = 0; i < cols.length; i++) {
     
               var data = cols[i].split(',');          
-                setValue(data[0],data[1],data[2],0,"","","","","","","","","","","");
+                setValue(data[0].replace(/-/g, ''),data[1],data[2],0,"","","","","","","","","","","");
             }
 result.innerHTML = '入力したデータを取り込みました'; 
 }
