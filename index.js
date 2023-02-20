@@ -173,7 +173,7 @@ async function deleteAll3(){
 function downloadCSV(bbb) {
     return new Promise(function(resolve) {
     //ダウンロードするCSVファイル名を指定する
-    var filename = "測定結果.csv";
+    var filename = "Sokuteikekka.csv";
     //CSVデータ
     var data =  "電柱NO,緯度,経度,接地測定値,B種,舗装,メモ,メモ2,測定緯度,測定経度,測定日時,IV,ボルコン,蓄力２号,蓄力３号,ステバン" + "\n" + bbb
     //BOMを付与する（Excelでの文字化け対策）
