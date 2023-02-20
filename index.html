@@ -19,9 +19,7 @@ if('serviceWorker' in navigator){
 <body>
 <h3>接地測定メニュー</h3>
 <br><label for="file" class="file-btn">CSVファイルから測定データ作成<input type="file" id="file" name="file" /></label><br>
-入力欄<br>
-<textarea  id="ttt" class="txt"  cols="40" rows="8" placeholder="キー番号,緯度,経度,を入力してください。"></textarea ><br>
-<label class="BT" onclick="txtinp()">入力欄から測定データ作成</label><br>
+
 <br><label  class="BT" onclick="getCount()">データ数確認</label><br>
 <br><label class="BT" onclick="location.href='./tizu.html'" >マップ表示</label><br>
 <br><label  class="BT" onclick="dCSV()">測定結果CSV出力</label><br>
