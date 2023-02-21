@@ -269,8 +269,6 @@ function GPS() {
 	}
   function error(err) {
 		alert('位置情報を取得できませんでした。');
-		GLAT.value = 0;
-		GLNG.value = 0;
 	}
 	var options = {
 		enableHighAccuracy: true,
