@@ -1,5 +1,4 @@
 
-
 //グーグルマップを開く
 function gmap() {
 if (document.getElementById("POLNO").value>0){} else {alert('マーカーを選択してから押すと、グーグルマップで現在地からの経路が表示されます。');return;}
@@ -342,15 +341,26 @@ function ima() {
 function Bsyu(){
 const etc = document.getElementById("etc").value
 const st = document.getElementById("setti1").value
+if (etc == '7'){
+document.getElementById('BSY').style.visibility = 'visible';
+document.getElementById('asyu').style.visibility = 'visible';
+document.getElementById('bsyu').style.visibility = 'visible';
+document.getElementById('asyu').value = 'D種';
+document.getElementById('bsyu').value = 'A種';
+    }else{
 if (etc >= '4'){
 document.getElementById('BSY').style.visibility = 'visible';
 document.getElementById('asyu').style.visibility = 'visible';
 document.getElementById('bsyu').style.visibility = 'visible';
+document.getElementById('asyu').value = 'A種';
+document.getElementById('bsyu').value = 'B種';
     }else{
     document.getElementById('BSY').style.visibility = 'hidden';
+document.getElementById('asyu').value = '';
+document.getElementById('bsyu').value = '';
     document.getElementById('asyu').style.visibility = 'hidden';
     document.getElementById('bsyu').style.visibility = 'hidden';
-  }
+  }}
 
 if (etc === '1' && st !== '999'){
   document.getElementById('setti1').value = '999';
