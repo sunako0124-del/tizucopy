@@ -17,14 +17,16 @@ if('serviceWorker' in navigator){
 </script>
 </head>
 <body>
-<h3>接地測定メニュー</h3>
+<h3 align="center">接地測定メニュー</h3>
+
 <br><label for="file" class="file-btn">CSVファイルから測定データ作成<input type="file" id="file" name="file" /></label><br>
 
-<br><label  class="BT" onclick="getCount()">データ数確認</label><br>
+<br><label class="BT" onclick="getCount()">データ数確認</label><br>
 <br><label class="BT" onclick="location.href='./tizu.html'" >マップ表示</label><br>
-<br><label  class="BT" onclick="dCSV()">測定結果CSV出力</label><br>
-<br><label  class="BT" onclick="deleteAll3()">全データ削除</label><br>
+<br><label class="BT" onclick="dCSV()">測定結果CSV出力</label><br>
+<br><label class="BT" onclick="deleteAll3()">全データ削除</label><br>
 <hr/>
+
 <h3>処理結果</h3>
 <div id="result"></div>
 <script type="text/javascript" src="index.js"></script>
