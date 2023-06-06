@@ -1,0 +1,70 @@
+
+<html lang="ja">
+
+
+<head>
+
+ <meta charset="utf-8"/>
+ <title>削除メニュー</title>
+<link rel="manifest" href="manifest.json">
+
+<meta name="viewport" content="width=device-width,
+initial-scale=1.0,user-scalable=yes" />
+<link rel="stylesheet" href="index.css"/>
+
+
+<script>
+
+
+if('serviceWorker' in navigator){
+	navigator.serviceWorker.register("serviceworker.js").then(function(){
+		console.log("Service Worker is registered!!");
+	});
+}
+
+
+
+
+</script>
+</head>
+
+<body  bgcolor="yellow" text="#000000">
+<h3>削除メニュー</h3>
+
+
+<br><label  class="BT" onclick="location.href='./index.html'" >戻る</label><br>
+
+<h3>！！注意！！</h3>
+<h3>削除後データを復元することはできません。</h3>
+<h3>管理者の許可なく削除しないでください。</h3>
+<h3>PCでCSV内容を確認してから削除してください。</h3>
+
+<h3><input id="checbox1" type="checkbox" value="値１">データ削除に同意します</h3>
+
+
+<br><label  class="BT" onclick="checkcheck()">全データ削除</label><br>
+
+
+<hr/>
+<h3>処理結果</h3>
+<div id="result"></div>
+<script type="text/javascript" src="index.js"></script>
+
+<script>
+
+function checkcheck(){
+  if (checbox1.checked){
+    deleteAll3();
+
+  } else {
+    result.innerHTML='データ削除に同意にチェックしてから削除を実行してください。';
+  }
+
+}
+
+;
+</script>
+
+
+</body>
+</html>
