@@ -73,11 +73,11 @@ padding: 0; margin: 0
 .window {
 
 	max-width: 380px;
-	height: 440px;
+	height: 300px;
 	background-color: #bbb8b8;
 	border-radius: 10px;
 	position: fixed;
-	transform: translate(10%, 10%);
+	transform: translate(5%, 5%);
 	font-size: 12px;
 	
 
