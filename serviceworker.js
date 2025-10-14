@@ -7,4 +7,10 @@ self.addEventListener('activate', function(e) {
 });
  
 // サービスワーカー有効化に必須
-self.addEventListener('fetch', function(event) {});
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request).then(function(response) {
+      return response || fetch(event.request);
+    })
+  );
+});
