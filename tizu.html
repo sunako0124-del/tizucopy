@@ -1,112 +1,134 @@
-<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8"/>
-<title>CsvMap</title>
+<title>接地マップ</title>
 <!--スマビュー-->
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"  crossorigin=""/>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"  crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
 <link rel="stylesheet" href="easy-button.css"/>
 <link rel="stylesheet" href="T.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
 <script type="text/javascript" src="t.js"></script>
 <script type="text/javascript" src="easy-button.js"></script>
 
-</link></head>
+<script>
+//単独が選択された時
+window.addEventListener('DOMContentLoaded', function(){
+// プルダウンメニューのselect要素を取得
+var etc = document.getElementById("etc");
+// イベント「change」を登録
+etc.addEventListener("change",function(){
+   Bsyu();
+});
+// イベント「input」を登録
+etc.addEventListener("input",function(){
+   Bsyu();
+});
+});
+
+</script>
+
+</head>
 <body>
 <div id="map"></div>
-<div id="loading" class="loading-overlay">マーカー読み込み中...</div>
 
-<!--画面下の画面--------------------------------------------------------- -->
-<div class="box2">
-<table>
-<tr>
-<td><label >検索グループ</label></td>
-<td><select id="PullDownList" onchange="inputChange()" class="biko"></select></td>
-<td><input type="button" class="BT" value="検索解除" onclick="KAIJYO()"/> </td>
-</tr>
-</table>
-</div>
-
-<!--見えない部分 -->
-<td><input type="hidden" id="LAT"></td> 
-<td><input type="hidden" id="LNG"></td>
-<td><input type="hidden" id="GLAT"></td>
-<td><input type="hidden" id="GLNG"></td>
-<td><input type="hidden" id="noww"></td>
 <input type="checkbox" id="pop-up">
-
 <div class="overlay">
 <div class="window">
+<label class="close" for="pop-up">× </label>
+<p class="text">
+<td><input type="hidden" id="LAT" name="LAT" ></td>
+<td><input type="hidden" id="LNG" name="LNG" ></td>
+<td><input type="hidden" id="GLAT" name="GLAT" class="t1" disabled></td> 
+<td><input type="hidden" id="GLNG" name="GLNG" class="t1" disabled></td>
+<td><input type="hidden" id="noww" name="now" class="t1" disabled></td>
+<br>
+<br>
+ <table> 
+      <tr>
+         <td><label>番号</label></td>
+         <td colspan="2"><input type="number"  id="POLNO" name="POLNO"  class="t1" placeholder="キー" readonly></td>
+         <td><input type="button" value="経路表示" onclick="gmap()"/></td>
+      </tr>
 
-<!--pop-up画面--------------------------------------------------------- -->
-<label class="close" for="pop-up">×</label>
+      <tr>
+         <td><label>連絡事項</label></td>      
+         <td colspan="3"><select name="etc" id="etc" class="t1">
+         <option value="0"></option>
+         <option value="1">設備・接地がありません</option>
+         <option value="3">単独接地（共同あり）</option>
+         <option value="4">単独接地２極（共同なし）</option>
+         <option value="5">単独接地２極（A種共同あり）</option>
+<option value="6">単独接地２極（B種共同あり）</option>
+	<option value="7">単独接地２極（３３Kv配電線）</option>
+         </select></td>
+      </tr>
+      <tr>
+         <td><label>メモ</label></td>
+         <td colspan="3"><input  id="biko" name="biko" placeholder="メモ" class="t1"></td>
+      </tr>
+
+ <tr>
+         <td><label>地際情報</label></td>
+  
+         <form id ="tutibox"><td colspan="3">
+            <input type="radio" name="tuti" value="0" checked><label for="radio-c"> 不要</label>
+            <input type="radio" name="tuti" value="1" ><label for="radio-a">舗装 </label>
+            <input type="radio" name="tuti" value="2" ><label for="radio-b"> 敷石</label>
+         </td></form>
+      </tr>
+   </table>
+
 <table>
-
 <tr>
-<td colspan="1" ><input type="button" id="routeBtn" value="経路表示" class="BT" onclick="gmap()"/></td>
-<td colspan="4" ><input type="number" id="NO" disabled style="width: 190px; font-size:22px;"></td></tr>
-
-<tr><th>グループ</th>
-<td colspan="4"> <input type="number" id="GCD" disabled style="width: 190px; font-size:22px;"></td></tr>
-
-<tr><th>ランク</th><td colspan="2"><select id="rank"  class="biko">
-<option value="A">A</option>
-<option value="B">B</option>
-<option value="C0">C0</option>
-<option value="C1">C1</option>
-<option value="C2">C2</option>
-<option value="C3">C3</option>
-</select></td></tr>
-
-<tr><th>設備</th><td colspan="4"><select id="setub"  class="biko">
-<option value="0">通し・電柱間</option>
-<option value="1">通し鉄バインド</option>
-<option value="2">通し・カバー箇所</option>
-<option value="3">振分・引留</option>
-<option value="4">振分・引留（難燃クランプカバ）</option>
-<option value="6">引下線</option>
-<option value="7">変台棚先・ブッシング廻り</option>
-<option value="8">不要</option>
-</select></td></tr>
-
-<tr><th>数量</th><td colspan="1" >
-<input type="number" id="suryo" value="1" min="1" max="100" step="1" class="biko">
-</td>
-<td colspan="1"><input type="button" value="0" class="BT" onclick="suu0()"></td>
-<td colspan="1"><input type="button" value="+5" class="BT" onclick="suuPlus(5)"></td>
-<td colspan="1"><input type="button" value="+10" class="BT" onclick="suuPlus(10)"></td>
+<td> </td>
+<td><input  id="asyu" name="asyu" disabled class="BT"></td>
+<td><input  id="bsyu" name="bsyu" disabled class="BT"></td>
 </tr>
-
-<tr><th>メモ</th>
-<td colspan="4"><input  id="biko"  cols="40" rows="4" placeholder="メモ" class="biko" ></td>
-</tr>
-      
 <tr>
-<th> </th><th> </th><th> </th>
-<td colspan="2"><input type="button" value="完  了" class="BTNO"  onclick="setValue()"></td>
+<td><label>測定値</label></td>
+<td><input type="number" id="setti1" class="BT" name="setti1" placeholder="Ω"/></td>
+<td><input type="number" id="BSY" name="BSY" class="BT" placeholder="Ω"/></td>
+<td><input type="button" value="  登  録  " onclick="setValue()"/></td>
 </tr>
-
-<tr>
-<th>ステータス</th>
- <td colspan="2" >
-<select id="kflg"  class="biko">
-<option value="0">未登録</option>
-<option value="1">登録完了</option>
-<option value="3">保守未完</option>
-<option value="4">保守完了</option>
-</select>
-<td colspan="2" ><input type="button" value="ステータス保存" class="BT"  onclick="notValue()"> </td>
-</td>
-</tr>
-
 </table>
 
-  </div>
- </div>
-<script>
+<table border="1"> 
+      <tr>
+      <td colspan="5" align="center">使用材料</td>
+      </tr>
+      <tr>
+	<td align="center">IV線</td>
+	<td align="center">ﾎﾞﾙｺﾝ</td>
+	<td align="center">蓄力２</td>
+	<td align="center">蓄力３</td>
+	<td align="center">ｽﾃﾊﾞﾝ</td>
+      </tr>
+    
+      <tr>
+         <td><input type="number" id="IV" name="IV" class="BT"  placeholder="ｍ"/></td>
+         <td><input type="number" id="BRK" name="BRK" class="BT" placeholder="個数"/></td>
+         <td><input type="number" id="TIK2" name="TIK2" class="BT" placeholder="個数"/></td>
+         <td><input type="number" id="TIK3" name="TIK3" class="BT" placeholder="個数"/></td>
+         <td><input type="number" id="SUTE" name="SUTE" class="BT" placeholder="本"/></td>
+      </tr>
 
+   </table>
+
+
+</p>
+</div>
+</div>
+
+<script>
 //地図を描く
 var gsiattr = "<a href='https://portal.cyberjapan.jp/help/termsofuse.html' target='_blank'>地理院タイル</a>";
 var gsi = L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', { attribution: gsiattr ,maxZoom: 20,maxNativeZoom: 18});
@@ -120,18 +142,15 @@ var osm = L.tileLayer('https://tile.mierune.co.jp/mierune_mono/{z}/{x}/{y}.png',
 //
 var DKS = { color:'red', weight: 5 }
 var BKS = { color:'blue', weight: 5 }
+
+var moji = L.featureGroup();
 var MI = L.featureGroup();
 var KAN = L.featureGroup();
-var ho = L.featureGroup();
-var moji = L.featureGroup();
-//var line = L.featureGroup();
+var myIcon1 = L.divIcon({ className:'icon1'});var myIcon2 = L.divIcon({ className:'icon2'}); 
 var myIcon3 = L.divIcon({ className:'icon3'}); 
-var myIcon2 = L.divIcon({ className:'icon2'}); 
-
-var map = L.map('map', {center: [42.9577763,141.353986],zoom: 17,layers: [gsipale, MI, KAN, moji,ho]});
+var map = L.map('map', {center: [42.9577763,141.353986],zoom: 17,layers: [gsipale, MI, KAN]});
 var baseLayers = {"地理院地図": gsi,"淡色地図": gsipale,"航空写真": gsip,"オープンストリートマップ": osm};
-var overlays = { "完了":KAN,"未完":MI,"番号":moji,"保守情報":ho};
-
+var overlays = { "番号":moji,"完了":KAN,"未完":MI};
 L.control.layers(baseLayers, overlays).addTo(map);
 
 //スケール設定
@@ -150,140 +169,33 @@ currentWatchReset();
 currentWatch();
 }).addTo(map);
 
-//未完のみ表示
 L.easyButton('<strong>未</strong>', function(btn, easyMap) {
-	currentWatchReset();
-	if (currentWatchBtn) {
-	currentWatchBtn.state('current-watch');
-	currentWatchBtn = null;
-	}
-	mikan(); 
-	}
-	).addTo(map);
+currentWatchReset();
+if (currentWatchBtn) {
+currentWatchBtn.state('current-watch');
+currentWatchBtn = null;
+}
+mikan(); 
+}).addTo(map);
 
-//完了のみ表示
 L.easyButton('<strong>完</strong>', function(btn, easyMap) {
-	currentWatchReset();
-	if (currentWatchBtn) {
-	currentWatchBtn.state('current-watch');
-	currentWatchBtn = null;
-	}
-	kanryo(); 
-	}
-	).addTo(map);
+currentWatchReset();
+if (currentWatchBtn) {
+currentWatchBtn.state('current-watch');
+currentWatchBtn = null;
+}
+kanryo(); 
+}).addTo(map);
 
-
-//メニューに戻る
 L.easyButton('fa fa-reply-all', function(btn, easyMap) {
 window.location.href = './index.html'; // 通常の遷移
 }).addTo(map);
 
 //起動時スクリプト
-	window.addEventListener("load", async function() {
-  showLoading();         // 読み込み中表示開始
-
-  await KANRINOa();      // データ取得（待機）
-  KAIJYO();              // 初期化
-  await mikan();         // mikanが終わるまで待つ
-
-  hideLoading();         // 全部終わってから非表示
+window.addEventListener("load", function() {
+mikan();
 });
-//起動時
+</script>
 
-
-function showLoading() {
-  document.getElementById("loading").style.display = "block";
-}
-
-function hideLoading() {
-  document.getElementById("loading").style.display = "none";
-}
-
-//検索解除
-function KAIJYO() {
-document.getElementById("PullDownList").value = "";
-MAKall();
-}
-
-//地図移動
-map.on('moveend', function () {
-  const zoom = map.getZoom();
-
-  // ズーム16以上 → 番号マーカーを追加
-  if (zoom <= 16) {
-    moji.clearLayers(); // ズームが15以下ならすべて非表示
-  } else {
-    MAK_text(); // 新しいマーカーを追加（既存は保持）
-    hideMarkersOutsideBounds(); // 地図範囲外のマーカーを非表示
-  }
-
-  if (zoom > 17) {
-    map.addLayer(moji);
-  } else {
-    map.removeLayer(moji);
-  }
-  // ズーム14以上 → 未完レイヤー表示
-  if (zoom > 14) {
-    map.addLayer(MI);
-  } else {
-    map.removeLayer(MI);
-  }
-});
-
-//地図範囲外のマーカーを非表示
-function hideMarkersOutsideBounds() {
-const bounds = map.getBounds();
-  moji.eachLayer(layer => {
-    if (layer.getLatLng && !bounds.contains(layer.getLatLng())) {
-      moji.removeLayer(layer); // 地図範囲外なら非表示
-    }
-  });
-}
-
-
-//経路表示ボタン
-document.addEventListener('DOMContentLoaded', function() {
-  var polnoInput = document.getElementById('NO');
-  var routeBtn = document.getElementById('routeBtn');
-  if (polnoInput && routeBtn) {
-    routeBtn.value = (polnoInput.value ? polnoInput.value : "") + "経路表示";
-  }
-});
-
-//ぐるーぷCD  BOXに格納重複あり
-function KANRINOa() {
-  return new Promise(function(resolve) {
-    if (!db) {
-      console.error("DB is not initialized");
-      resolve();
-      return;
-    }
-
-    var result = document.getElementById("result");                   
-    var transaction = db.transaction(["mystore"], "readwrite");
-    var store = transaction.objectStore("mystore");
-    var request = store.openCursor();
-    let array = [];
-
-    request.onsuccess = function (event) {
-      if (event.target.result == null) {
-        resolve();
-        let res = new Set(array);
-        res.forEach((element) => {
-          let option = document.createElement('option');
-          option.text = element;
-          option.value = element;
-          document.getElementById("PullDownList").add(option);
-        });
-        document.getElementById("PullDownList").value = "";
-        return;
-      }
-      var cursor = event.target.result;
-      var data = cursor.value;
-      array.unshift(data.mv_1);
-      cursor.continue();
-    };
-  });
-}
-	
-</script></body></html>
+</body>
+</html>
