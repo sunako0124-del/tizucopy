@@ -205,7 +205,7 @@ function downloadCSV(bbb) {
     })
 } 
 
-//登録  NO 緯度 経度,数値,数値２,土,備考,備考２
+//登録  電柱NO,緯度,経度,接地測定値,B種,舗装,メモ,メモ2,測定緯度,測定経度,測定日時,IV→作業番号,ボルコン→内容,蓄力２号→期限,蓄力３号
        //key,myLAT.myLNG.myvalu.myBSY.mytuti.mybiko.myetc.myGLAT.myGLNG.mynow.myIV.myBRK.myTIK2.myTIK3
 
 function setValue(key,LAT,LNG,value,BSY,tuti,biko,etc,GLAT,GLNG,NOWW,IV,BK,TK2,TK3,SUTE) {

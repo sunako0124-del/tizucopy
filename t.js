@@ -87,7 +87,7 @@ function markerClick(e){
 //登録  
 function setValue(event) {
   var key = document.getElementById("POLNO").value;
-  var value = Number(document.getElementById("setti1").value);
+  var value = 999 //Number(document.getElementById("setti1").value);
   var LAT = Number(document.getElementById("LAT").value);
   var LNG = Number(document.getElementById("LNG").value);
 
@@ -95,11 +95,11 @@ function setValue(event) {
   var GLNG = Number(document.getElementById("GLNG").value);
 
   var now = document.getElementById("noww").value;
-  var etc = document.getElementById("etc").value;
+  var etc =  1 //document.getElementById("etc").value;
   var BSY = Number(document.getElementById("BSY").value);
-  var IV = document.getElementById("IV").value;
-  var BRK = document.getElementById("BRK").value;
-  var TIK2 = document.getElementById("TIK2").value;
+  var IV = document.getElementById("IV").value;//No.
+  var BRK = document.getElementById("BRK").value;//内容
+  var TIK2 = document.getElementById("TIK2").value;//期限
   var TIK3 = document.getElementById("TIK3").value;
   var SUTE = document.getElementById("SUTE").value;
 
@@ -123,7 +123,8 @@ function setValue(event) {
   var transaction = db.transaction(["mystore"], "readwrite");
   var store = transaction.objectStore("mystore")
   var request = store.put({ mykey: key, myvalue: value, myBSY: BSY, myLAT: LAT, myLNG: LNG, mytuti: tuti, mybiko: biko, myGLAT: GLAT, myGLNG: GLNG, mynow: now ,myetc:etc, myIV:IV, myBRK:BRK, myTIK2:TIK2, myTIK3:TIK3, mySUTE:SUTE});
-  
+  //登録  電柱NO,緯度,経度,接地測定値,B種,舗装,メモ,メモ2,測定緯度,測定経度,測定日時,IV→作業番号,ボルコン→内容,蓄力２号→期限,蓄力３号
+  //key,myLAT.myLNG.myvalu.myBSY.mytuti.mybiko.myetc.myGLAT.myGLNG.mynow.myIV.myBRK.myTIK2.myTIK3
   
   MAK();
 

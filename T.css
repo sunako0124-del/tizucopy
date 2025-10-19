@@ -1,3 +1,17 @@
+.button {
+  width: 90px;       /* 横幅 */
+  height: 28px;       /* 高さ */
+  font-size: 16px;    /* 文字サイズ */
+  /*padding: 8px 16px;  /* 内側の余白（上下 左右） */
+}
+
+.button2 {
+  width: 120px;       /* 横幅 */
+  height: 36px;       /* 高さ */
+  font-size: 20px;    /* 文字サイズ */
+  /*padding: 8px 16px;  /* 内側の余白（上下 左右） */
+}
+
 .BT{
     display: block;
     width: 95%;
@@ -7,13 +21,14 @@
 	text-align: center;  
 }
 
-.t1{
-    display: block;
-    width: 95%;
-    border: 0px solid #999;
-    box-sizing: border-box;
-    font-size: 16px;
+.t1 {
+  display: block;              /* ブロック要素として表示（改行される） */
+  width: 95%;                  /* 親要素の幅の95%に広げる */
+  border: 0px solid #999;      /* 枠線なし（色指定はあるが太さ0） */
+  box-sizing: border-box;      /* paddingやborderを含めてwidthを計算 */
+  font-size: 20px;             /* 文字サイズを20pxに設定 */
 }
+
 
 .t2{
     display: block;
@@ -23,6 +38,14 @@
     box-sizing: border-box;
     margin: auto;
     font-size: 16px;
+}
+
+.t3 {
+  display: block;              /* ブロック要素として表示（改行される） */
+  width: 145%;                  /* 親要素の幅の95%に広げる */
+  border: 0px solid #999;      /* 枠線なし（色指定はあるが太さ0） */
+  box-sizing: border-box;      /* paddingやborderを含めてwidthを計算 */
+  font-size: 16px;             /* 文字サイズを20pxに設定 */
 }
 
 table{
@@ -72,8 +95,8 @@ padding: 0; margin: 0
 }
 .window {
 
-	max-width: 380px;
-	height: 300px;
+	max-width: 400px;
+	height: 220px;
 	background-color: #bbb8b8;
 	border-radius: 10px;
 	position: fixed;
@@ -92,6 +115,13 @@ padding: 0; margin: 0
 	top: 4px;
 	right: 4px;
 	font-size: 20px;
+}
+
+.center-box {
+  text-align: center;
+}
+.btn {
+  display: inline-block;
 }
 
 

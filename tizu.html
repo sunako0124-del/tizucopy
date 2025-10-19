@@ -53,76 +53,45 @@ etc.addEventListener("input",function(){
 <br>
 <br>
  <table> 
+
       <tr>
-         <td><label>番号</label></td>
-         <td colspan="2"><input type="number"  id="POLNO" name="POLNO"  class="t1" placeholder="キー" readonly></td>
-         <td><input type="button" value="経路表示" onclick="gmap()"/></td>
+         <td><label>No.</label></td>
+         <td colspan="2"><input type="number" id="IV" name="IV" class="t1"  placeholder="作業番号" readonly></td>
       </tr>
 
       <tr>
-         <td><label>連絡事項</label></td>      
-         <td colspan="3"><select name="etc" id="etc" class="t1">
-         <option value="0"></option>
-         <option value="1">設備・接地がありません</option>
-         <option value="3">単独接地（共同あり）</option>
-         <option value="4">単独接地２極（共同なし）</option>
-         <option value="5">単独接地２極（A種共同あり）</option>
-<option value="6">単独接地２極（B種共同あり）</option>
-	<option value="7">単独接地２極（３３Kv配電線）</option>
-         </select></td>
+         <td><label>電柱番号</label></td>
+         <td colspan="2"><input type="number"  id="POLNO" name="POLNO"  class="t1" placeholder="キー" readonly></td>
+         <td><input type="button" value="経路表示" class="button" onclick="gmap()"/></td>
       </tr>
+
       <tr>
-         <td><label>メモ</label></td>
-         <td colspan="3"><input  id="biko" name="biko" placeholder="メモ" class="t1"></td>
+         <td><label>改修内容</label></td>
+         <td colspan="2"><input type="number" id="BRK" name="BRK" class="t3"  placeholder="作業内容" readonly></td>
+      </tr>
+
+      <tr>
+         <td><label>改修期限</label></td>
+         <td colspan="2"><input type="number" id="TIK2" name="TIK2" class="t1"  placeholder="作業内容" readonly></td>
       </tr>
 
  <tr>
-         <td><label>地際情報</label></td>
-  
-         <form id ="tutibox"><td colspan="3">
-            <input type="radio" name="tuti" value="0" checked><label for="radio-c"> 不要</label>
-            <input type="radio" name="tuti" value="1" ><label for="radio-a">舗装 </label>
-            <input type="radio" name="tuti" value="2" ><label for="radio-b"> 敷石</label>
-         </td></form>
+         <td>
+         </td>
       </tr>
    </table>
 
 <table>
 <tr>
 <td> </td>
-<td><input  id="asyu" name="asyu" disabled class="BT"></td>
-<td><input  id="bsyu" name="bsyu" disabled class="BT"></td>
+
 </tr>
 <tr>
-<td><label>測定値</label></td>
-<td><input type="number" id="setti1" class="BT" name="setti1" placeholder="Ω"/></td>
-<td><input type="number" id="BSY" name="BSY" class="BT" placeholder="Ω"/></td>
-<td><input type="button" value="  登  録  " onclick="setValue()"/></td>
+<div class="center-box">
+<td align="center"><input type="button" value="  作業完了  " class="button2" onclick="setValue()"/></td>
+</div>
 </tr>
 </table>
-
-<table border="1"> 
-      <tr>
-      <td colspan="5" align="center">使用材料</td>
-      </tr>
-      <tr>
-	<td align="center">IV線</td>
-	<td align="center">ﾎﾞﾙｺﾝ</td>
-	<td align="center">蓄力２</td>
-	<td align="center">蓄力３</td>
-	<td align="center">ｽﾃﾊﾞﾝ</td>
-      </tr>
-    
-      <tr>
-         <td><input type="number" id="IV" name="IV" class="BT"  placeholder="ｍ"/></td>
-         <td><input type="number" id="BRK" name="BRK" class="BT" placeholder="個数"/></td>
-         <td><input type="number" id="TIK2" name="TIK2" class="BT" placeholder="個数"/></td>
-         <td><input type="number" id="TIK3" name="TIK3" class="BT" placeholder="個数"/></td>
-         <td><input type="number" id="SUTE" name="SUTE" class="BT" placeholder="本"/></td>
-      </tr>
-
-   </table>
-
 
 </p>
 </div>
